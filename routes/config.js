@@ -20,6 +20,7 @@ const sequelize = new Sequelize({
     username: 'root',
     password: 'root',
     database: 'moni_db',
-    timezone: '+08:00'
+    timezone: '+08:00',
+    dialect: 'mysql'
 })
 module.exports = sequelize
