@@ -1,56 +1,16 @@
 var express = require('express');
 var router = express.Router();
-const connection = require('./db')
+var stability = require('../controllers/stability.controller');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  // 对数据库某个特定的表进行查询
-  connection.query('select * from stability', (err, users) => {
-    if(err) {
-      res.send('query error')
-    } else {
-      // 返回值处理：过滤值为空的属性
-      let result = JSON.stringify(users).slice(1, -1);
-      result = removeProperty(JSON.parse(result))
-      // console.log(result)
-      res.send(result)
-    }
-  })
-  // res.render('index', { title: 'Express' });
-});
+/**
+ * @route POST /home_data2
+ * @group 关于js Error查询管理
+ * @param {string} 输入时间和errorType
+ * @returns {object} 200 - An array of visitor info
+ * @returns {object} 605 - 请求失败
+ * @returns {Error}  default - Unexpected error
+ */
 
-// post方法请求返回的数据
-router.post('/', function(req, res, next) {
-    // 将req.body格式转为正常的对象数据
-    let res1 = JSON.stringify(req.body).slice(2, -5)
-    console.log(res1)
-    res1 = JSON.parse(res1)
-    console.log(res1)
-    res.send('test post')
-    /*
-    // 对数据库某个特定的表进行查询
-    connection.query('select * from stability', (err, users) => {
-    if(err) {
-        res.send('query error')
-    } else {
-        // 返回值处理：过滤值为空的属性
-        let result = JSON.stringify(users).slice(1, -1);
-        result = removeProperty(JSON.parse(result))
-        // console.log(result)
-        res.send('test post')
-    }
-    })
-    */
-});
+router.post('/', stability.findAll);
 
-function removeProperty(obj) {
-  Object.keys(obj).forEach(item => {
-    if (obj[item] === '' || obj[item] === undefined || obj[item] === null || obj[item] === 'null') delete obj[item]
-  })
-  return obj
-}
-
-function parseBody(body) {
-    let res1 = JSON.stringify(body).slice(3, -6)
-}
 module.exports = router;

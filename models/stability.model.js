@@ -16,6 +16,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         kind: {
             type: Sequelize.STRING,
+            allowNull: false
         },
         message: {
             type: Sequelize.STRING,
@@ -37,6 +38,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         type: {
             type: Sequelize.STRING,
+            allowNull: false
         },
         url: {
             type: Sequelize.STRING,

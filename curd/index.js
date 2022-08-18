@@ -90,21 +90,14 @@
              sort: {
                  prop:'createdAt',
                  order:'desc / asc：升序',
-             }
+             },
+            {
+                row: true
+            }
          }*/
          if (!model) return cb(resExtra('', 605, '模型不存在'));
-         model.findAndCountAll(queryConditions(conditions, 'count')).then(countAll => {
-             model.findAll(queryConditions(conditions)).then(data => {
-                 cb(resExtra({
-                     data,
-                     count: countAll.count,
-                     current: conditions.offset || 1,
-                     limit: conditions.limit || 10
-                 }))
-             }).catch(err => {
-                 logger.error(JSON.stringify(err))
-                 cb(resExtra(err, 605, '查询失败'))
-             })
+         model.findAll(queryConditions(conditions)).then(res => {
+             console.log('res', res)
          }).catch(err => {
              console.log(err)
              logger.error(JSON.stringify(err))

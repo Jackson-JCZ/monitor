@@ -16,11 +16,11 @@ module.exports = {
 const Sequelize = require('sequelize')
 // 创建实例对象并配置连接信息
 const sequelize = new Sequelize({
+    dialect: 'mysql',
     host: '47.103.139.192',
     username: 'root',
     password: 'root',
     database: 'moni_db',
     timezone: '+08:00',
-    dialect: 'mysql'
 })
 module.exports = sequelize

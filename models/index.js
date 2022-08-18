@@ -8,6 +8,6 @@ db.sequelize = sequelize;
 db.Op = Op;
 
 // stability表
-db.stability = require('./stability.model')(sequelize, Sequelize);
+db.stability = require('./stability.model.js')(sequelize, Sequelize);
 
 module.exports = db;
