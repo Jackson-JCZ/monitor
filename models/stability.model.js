@@ -89,6 +89,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
         }
     }, {
-        tableName: 'stability'
+        tableName: 'stability',
+        timestamps: false
     });
 };
