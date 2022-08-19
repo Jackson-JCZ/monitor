@@ -101,7 +101,7 @@
              console.log('res', res.map(x=>utilsTools.removeProperty(x)));
              utilsTools.filterAryToJson(res, pm);
              cb(resExtra(res))
-             
+
          }).catch(err => {
              console.log(err)
              logger.error(JSON.stringify(err))
@@ -145,7 +145,8 @@
          // title:params.title
          // }
          model.create(obj).then(data => {
-             cb(resExtra(data, 200, '创建成功！'))
+            //  不需要返回创建成功的数据
+             cb(resExtra('', 200, '创建成功！'))
          }).catch(err => {
              logger.error(JSON.stringify(err))
              console.log(err)
@@ -166,7 +167,7 @@
          }*/
          model.update(obj, {where: key}).then(data => {
              if (data[0]) {
-                 cb(resExtra(data, 200, '更新成功！'))
+                 cb(resExtra('',200, '更新成功！'))
              } else {
                  cb(resExtra('', 605, 'ID不存在！'))
              }
