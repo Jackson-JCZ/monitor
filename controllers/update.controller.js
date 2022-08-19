@@ -1,33 +1,35 @@
 const db = require('../models')
+// 引入表模型
 const stability = db.stability
+const behavior = db.behavior
+const experience = db.experience
+
 const curd = require('../curd');
-const { Sequelize } = require('../models');
 const {Op} = require('sequelize')
-const {parseBody} = require('../utils/utils.tools').parseBody
- 
-exports.findAll = (req, res) => {
-    const pm = parseBody(req.body);
+// const utils = require('../utils/utils.tools')
+
+
+function get_client_ip(req) {
+    var ipStr = req.headers['x-forwarded-for'] ||
+        req.ip ||
+        req.connection.remoteAddress ||
+        req.socket.remoteAddress ||
+        req.connection.socket.remoteAddress || '';
+    var ipReg = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/;
+    if (ipStr.split(',').length > 0) {
+        ipStr = ipStr.split(',')[0]
+    }
+    var ip = ipReg.exec(ipStr);
+    return ip[0];
+};
+
+exports.updateData = (req, res) => {
+    const pm = req.body;
     console.log('pm', pm)
-    console.log(new Date(pm.to))
-    /*
-    // 原生查询
-    curd.doQuery('select * from stability', list=>{
+    pm.ip = get_client_ip(req);
+    let model = {stability: stability, behavior: behavior, experience: experience}
+    console.log('model', model[pm.kind])
+    curd.create(model[pm.kind], pm, list=>{
         res.send(list);
     })
-    */
-   let conditions = {
-       params:{
-            timestamp:{
-                [Op.gte]: new Date(pm.from),
-                [Op.lte]: new Date(pm.to)
-            },
-            errorType: { 
-                [Op.like]: pm.logType   // 忽略大小写查询
-            }
-       },
-        raw: true
-   }
-   curd.list(pm, stability, conditions, list=>{
-       res.send(list);
-   })
-}
+}         

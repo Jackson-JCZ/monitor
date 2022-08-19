@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 // var home_data = require('./routes/home_data_init');
 var home_data = require('./routes/home_data')
+var sdk_post = require('./routes/sdk_post')
 var app = express();
 
 // view engine setup
@@ -25,7 +26,7 @@ app.use('/users', usersRouter);
 // app.use('/home_data_init', home_data);
 
 app.use('/home_data', home_data);
-
+app.use('/sdk_post', sdk_post);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

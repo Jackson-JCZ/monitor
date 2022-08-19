@@ -23,6 +23,8 @@ function parseBody(body) {
     return obj;
 }
 
+
+
 exports.findAll = (req, res) => {
     const pm = parseBody(req.body);
     console.log('pm', pm)

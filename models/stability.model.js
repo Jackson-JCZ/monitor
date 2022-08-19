@@ -87,6 +87,9 @@ module.exports = (sequelize, Sequelize) => {
         },
         value: {
             type: Sequelize.STRING,
+        },
+        ip:{
+            type: Sequelize.STRING,
         }
     }, {
         tableName: 'stability',
