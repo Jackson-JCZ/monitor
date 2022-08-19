@@ -79,7 +79,7 @@
       * @param  {Object}   conditions  条件集合
       * @param  {Function} cb          回调函数
       */
-     list: (model, conditions, cb) => {
+     list: (pm, model, conditions, cb) => {
          /*查询条件格式
          conditions = {
              params: {
@@ -95,15 +95,19 @@
                 row: true
             }
          }*/
+         let result;
          if (!model) return cb(resExtra('', 605, '模型不存在'));
          model.findAll(queryConditions(conditions)).then(res => {
-             console.log('res', res)
+             console.log('res', res.map(x=>utilsTools.removeProperty(x)));
+             utilsTools.filterAryToJson(res, pm);
+             cb(resExtra(res))
+             
          }).catch(err => {
              console.log(err)
              logger.error(JSON.stringify(err))
-             cb(resExtra(err, 605, '查询失败'))
+             result = resExtra(err, 605, '查询失败')
+             cb(result)
          })
- 
      },
  
      /**

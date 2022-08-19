@@ -3,26 +3,8 @@ const stability = db.stability
 const curd = require('../curd');
 const { Sequelize } = require('../models');
 const {Op} = require('sequelize')
-// 解析body为字符串
-function parseBody(body) {
-    let ary_body = JSON.stringify(body).slice(3, -6).split(',');
-    let obj = {};
-    for(let ele of ary_body) {
-        let tmp = ele.split(':');
-        if(tmp.length>2) {
-            tmp_copy = tmp.concat([]);
-            tmp_copy.shift();
-            tmp[1] = tmp_copy.join(':');
-        }
-        // 去除单引号
-        if(tmp[1][0]=="'" && tmp[1][tmp[1].length-1]=="'"){
-            tmp[1] = tmp[1].slice(1, -1);
-        }
-        obj[tmp[0]] = tmp[1];
-    }
-    return obj;
-}
-
+const {parseBody} = require('../utils/utils.tools').parseBody
+ 
 exports.findAll = (req, res) => {
     const pm = parseBody(req.body);
     console.log('pm', pm)

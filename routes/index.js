@@ -37,11 +37,5 @@ router.post('/', function(req, res, next) {
   // res.render('index', { title: 'Express' });
 });
 
-function removeProperty(obj) {
-  Object.keys(obj).forEach(item => {
-    if (obj[item] === '' || obj[item] === undefined || obj[item] === null || obj[item] === 'null') delete obj[item]
-  })
-  return obj
-}
 
 module.exports = router;

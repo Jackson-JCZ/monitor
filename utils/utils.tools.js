@@ -61,6 +61,103 @@ const utilsTools = {
                 let u = new UAParser(req.headers['user-agent'])
             }
         )
+    },
+    removeProperty: function(obj) {
+        Object.keys(obj).forEach(item => {
+          if (obj[item] === '' || obj[item] === undefined || obj[item] === null || obj[item] === 'null') delete obj[item]
+        })
+        return obj
+    },
+
+    formatDate: function(msec) {
+        let datetime = new Date(msec);
+        let year = datetime.getFullYear();
+        let month = datetime.getMonth();
+        let date = datetime.getDate();
+        let hour = datetime.getHours();
+        let minute = datetime.getMinutes();
+        let second = datetime.getSeconds();
+    
+        let result1 = year + 
+                    '-' + 
+                    ((month + 1) >= 10 ? (month + 1) : '0' + (month + 1)) + 
+                    '-' + 
+                    ((date + 1) < 10 ? '0' + date : date) + 
+                    ' ' + 
+                    ((hour + 1) < 10 ? '0' + hour : hour) +
+                    ':' + 
+                    ((minute + 1) < 10 ? '0' + minute : minute) + 
+                    ':' + 
+                    ((second + 1) < 10 ? '0' + second : second);
+    
+        let result2 = year + 
+                    '-' + 
+                    ((month + 1) >= 10 ? (month + 1) : '0' + (month + 1)) + 
+                    '-' + 
+                    ((date + 1) < 10 ? '0' + date : date);
+    
+        let result = {
+            hasTime: result1,
+            withoutTime: result2
+        };
+        return result;
+    },
+    // 聚合函数
+    groupBy: function(ary){
+        let map = {};
+        for(let i=0; i<ary.length; i++) {
+            let oldData = ary[i];
+            let data = {num: 0};
+            if(map[oldData.timestamp]==null) {
+                data.timestamp = this.formatDate(ary[i].timestamp).hasTime;
+                data.num++;
+                map[oldData.timestamp] = data;
+            } else {
+                data = map[oldData.timestamp];
+                data.num++;
+            }
+        }
+        //组装新数组
+        var relDatas = [];
+        for (var i in map) {
+            relDatas.push(map[i]);
+        }
+        return relDatas;
+    },
+    filterAryToJson: function(ary, pm) {
+        let result = [];
+        ary.sort((x,y)=>x.timestamp - y.timestamp); // 按照时间排序
+        // 遍历每条查询结果
+        ary = this.groupBy(ary);
+        // 修改键名
+        result = ary.map((item)=>{
+            return {
+                [pm.logType]: item['num'],
+                key: item['timestamp']
+            }
+        })
+        console.log(result)
+        return result;
+    },
+
+    // 解析body为字符串
+    parseBody: function(body) {
+        let ary_body = JSON.stringify(body).slice(3, -6).split(',');
+        let obj = {};
+        for(let ele of ary_body) {
+            let tmp = ele.split(':');
+            if(tmp.length>2) {
+                tmp_copy = tmp.concat([]);
+                tmp_copy.shift();
+                tmp[1] = tmp_copy.join(':');
+            }
+            // 去除单引号
+            if(tmp[1][0]=="'" && tmp[1][tmp[1].length-1]=="'"){
+                tmp[1] = tmp[1].slice(1, -1);
+            }
+            obj[tmp[0]] = tmp[1];
+        }
+        return obj;
     }
 }
 
