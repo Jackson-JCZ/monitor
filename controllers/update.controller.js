@@ -26,7 +26,8 @@ function get_client_ip(req) {
 exports.updateData = (req, res) => {
     const pm = req.body;
     console.log('pm', pm)
-    pm.ip = get_client_ip(req);
+    // console.log()
+    // pm.ip = get_client_ip(req);
     let model = {stability: stability, behavior: behavior, experience: experience}
     console.log('model', model[pm.kind])
     curd.create(model[pm.kind], pm, list=>{

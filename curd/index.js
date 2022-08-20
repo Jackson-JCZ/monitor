@@ -6,13 +6,17 @@
  const utilsTools = require("../utils/utils.tools");
  const db = require("../models/index");
  const logger = require("../utils/utils.logger");
-
  
  //整理统一返回格式
  function resExtra(data, code = 200, message = '操作成功！') {
      return {data, code, message}
  }
  
+//  根据ip进行去重
+function filterIp(arr) {
+    var res = new Map();
+    return arr.filter((a) => !res.has(a.ip) && res.set(a.ip, 1));
+}
  //查询列表条件处理
  function queryConditions(conditions, count) {
      let queryCon = {
@@ -79,7 +83,7 @@
       * @param  {Object}   conditions  条件集合
       * @param  {Function} cb          回调函数
       */
-     list: (pm, model, conditions, cb) => {
+     list: (stability, pm, model, conditions,con, cb) => {
          /*查询条件格式
          conditions = {
              params: {
@@ -95,13 +99,39 @@
                 row: true
             }
          }*/
+         
          let result;
          if (!model) return cb(resExtra('', 605, '模型不存在'));
-         model.findAll(queryConditions(conditions)).then(res => {
-             console.log('res', res.map(x=>utilsTools.removeProperty(x)));
-             utilsTools.filterAryToJson(res, pm);
-             cb(resExtra(res))
+         stability.findAll(queryConditions(con)).then(res => {
+            // 总访问数
+            res.map(x=>utilsTools.removeProperty(x))
+            let pv_uv_sum = utilsTools.filterAryToJson(res, 'pv');
+            // console.log(res);
+            // console.log('pv_uv_sum',pv_uv_sum);
+            model.findAll(queryConditions(conditions)).then(res2=>{
+                res2.map(x=>utilsTools.removeProperty(x))
+                let data = utilsTools.filterAryToJson(res2, pm.logType);
 
+                let res_data = []
+                let indicatorList = pm.indicatorList;
+                for(let i=0; i<data.length; i++) {
+                    data[i]['pv_percent'] = data[i][pm.logType]/pv_uv_sum[i]['pv'];
+                    data[i]['uv_percent'] = data[i]['uv']/pv_uv_sum[i]['uv']; 
+                    let obj = {}
+                    for(let j=0; j<indicatorList.length; j++) {
+                        obj[indicatorList[j]] = data[i][indicatorList[j]]!=='undefined' ? data[i][indicatorList[j]]: null;
+                    }
+                    res_data.push(obj)
+                }
+                // console.log(res_data)
+                cb(resExtra(res_data))
+
+            }).catch(err => {
+                console.log(err)
+                logger.error(JSON.stringify(err))
+                result = resExtra(err, 605, '查询失败')
+                cb(result)
+            })
          }).catch(err => {
              console.log(err)
              logger.error(JSON.stringify(err))

@@ -105,16 +105,22 @@ const utilsTools = {
     // 聚合函数
     groupBy: function(ary){
         let map = {};
+        let uv_map = {};
         for(let i=0; i<ary.length; i++) {
             let oldData = ary[i];
-            let data = {num: 0};
+            let data = {pv: 0, uv: 0};
             if(map[oldData.timestamp]==null) {
                 data.timestamp = this.formatDate(ary[i].timestamp).hasTime;
-                data.num++;
+                data.pv++; data.uv++;
+                uv_map[oldData.ip] = data; 
                 map[oldData.timestamp] = data;
             } else {
                 data = map[oldData.timestamp];
-                data.num++;
+                data.pv++;
+                if(uv_map[oldData.ip]==null) {
+                    data.uv++;
+                    uv_map[oldData.ip] = data; 
+                }
             }
         }
         //组装新数组
@@ -124,7 +130,7 @@ const utilsTools = {
         }
         return relDatas;
     },
-    filterAryToJson: function(ary, pm) {
+    filterAryToJson: function(ary, attribute) {
         let result = [];
         ary.sort((x,y)=>x.timestamp - y.timestamp); // 按照时间排序
         // 遍历每条查询结果
@@ -132,11 +138,11 @@ const utilsTools = {
         // 修改键名
         result = ary.map((item)=>{
             return {
-                [pm.logType]: item['num'],
-                key: item['timestamp']
+                [attribute]: item['pv'],
+                key: item['timestamp'],
+                uv: item['uv']
             }
         })
-        console.log(result)
         return result;
     },
 

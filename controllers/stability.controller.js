@@ -1,5 +1,9 @@
 const db = require('../models')
+// 引入表模型
 const stability = db.stability
+const behavior = db.behavior
+const experience = db.experience
+
 const curd = require('../curd');
 const { Sequelize } = require('../models');
 const {Op} = require('sequelize')
@@ -23,9 +27,18 @@ function parseBody(body) {
     return obj;
 }
 
+function parseStringAry(str) {
+    str = str.slice(1,-1);
+    str = str.replace(/'|"/g, '');
+    console.log(str)
+    return str.split(',');
+}
 exports.findAll = (req, res) => {
     const pm = req.body;
+    pm.indicatorList = parseStringAry(pm.indicatorList);
     console.log('pm', pm)
+    console.log(Array.from(pm.indicatorList))
+
     console.log(new Date(pm.to))
     /*
     // 原生查询
@@ -33,7 +46,17 @@ exports.findAll = (req, res) => {
         res.send(list);
     })
     */
-   let conditions = {
+    let model = {stability: stability, behavior: behavior, experience: experience}
+    let con = {
+        params: {
+            timestamp:{
+               [Op.gte]: new Date(pm.from),
+               [Op.lte]: new Date(pm.to)
+           },
+        },
+        raw: true
+    }
+    let conditions = {
        params:{
             timestamp:{
                 [Op.gte]: new Date(pm.from),
@@ -45,7 +68,7 @@ exports.findAll = (req, res) => {
        },
         raw: true
    }
-   curd.list(pm, stability, conditions, list=>{
+   curd.list(stability, pm, model[pm.kind], conditions, con, list=>{
        res.send(list);
    })
 }
