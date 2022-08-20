@@ -121,6 +121,7 @@ function filterIp(arr) {
                     for(let j=0; j<indicatorList.length; j++) {
                         obj[indicatorList[j]] = data[i][indicatorList[j]]!=='undefined' ? data[i][indicatorList[j]]: null;
                     }
+                    obj['key'] = data[i]['key']
                     res_data.push(obj)
                 }
                 // console.log(res_data)

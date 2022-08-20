@@ -86,19 +86,23 @@ const utilsTools = {
                     ' ' + 
                     ((hour + 1) < 10 ? '0' + hour : hour) +
                     ':' + 
-                    ((minute + 1) < 10 ? '0' + minute : minute) + 
+                    ((minute + 1) < 10 ? '0' + minute : minute);
+                    /* + 
                     ':' + 
                     ((second + 1) < 10 ? '0' + second : second);
+                    */
     
         let result2 = year + 
                     '-' + 
                     ((month + 1) >= 10 ? (month + 1) : '0' + (month + 1)) + 
                     '-' + 
-                    ((date + 1) < 10 ? '0' + date : date);
+                    ((date + 1) < 10 ? '0' + date : date) + 
+                    ' ' + 
+                    ((hour + 1) < 10 ? '0' + hour : hour) + ":00";
     
         let result = {
-            hasTime: result1,
-            withoutTime: result2
+            hasMin: result1,
+            withoutMin: result2
         };
         return result;
     },
@@ -109,8 +113,8 @@ const utilsTools = {
         for(let i=0; i<ary.length; i++) {
             let oldData = ary[i];
             let data = {pv: 0, uv: 0};
-            if(map[oldData.timestamp]==null) {
-                data.timestamp = this.formatDate(ary[i].timestamp).hasTime;
+            if(map[this.formatDate(oldData.timestamp).hasMin]==null) {
+                data.timestamp = this.formatDate(ary[i].timestamp).hasMin;
                 data.pv++; data.uv++;
                 uv_map[oldData.ip] = data; 
                 map[oldData.timestamp] = data;
