@@ -35,9 +35,10 @@ function parseStringAry(str) {
 }
 exports.findAll = (req, res) => {
     const pm = req.body;
+    // console.log(req)
     pm.indicatorList = parseStringAry(pm.indicatorList);
     console.log('pm', pm)
-    console.log(Array.from(pm.indicatorList))
+    // console.log(Array.from(pm.indicatorList))
 
     console.log(new Date(pm.to))
     /*
