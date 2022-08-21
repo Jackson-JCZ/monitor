@@ -24,13 +24,22 @@ function get_client_ip(req) {
 };
 
 exports.updateData = (req, res) => {
-    const pm = req.body;
-    console.log('pm', pm)
-    // console.log()
-    // pm.ip = get_client_ip(req);
-    let model = {stability: stability, behavior: behavior, experience: experience}
-    console.log('model', model[pm.kind])
-    curd.create(model[pm.kind], pm, list=>{
-        res.send(list);
-    })
+    try{
+        // console.log(req)
+        // console.log('nondy', req.body)
+        const pm = req.body;
+        console.log(typeof pm)
+        // console.log('req: ',req.rawTrailers)
+        // console.log('pm', pm)
+        // console.log()
+        pm.ip = get_client_ip(req);
+        let model = {stability: stability, behavior: behavior, experience: experience}
+        console.log('model', model[pm.kind])
+        curd.create(model[pm.kind], pm, list=>{
+            res.send(list);
+        })
+    } catch(e) {
+        console.log(e);
+        res.send(e)
+    }
 }         
