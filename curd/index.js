@@ -110,22 +110,26 @@ function filterIp(arr) {
             // console.log('pv_uv_sum',pv_uv_sum);
             model.findAll(queryConditions(conditions)).then(res2=>{
                 res2.map(x=>utilsTools.removeProperty(x))
-                let data = utilsTools.filterAryToJson(res2, pm.logType);
-
-                let res_data = []
-                let indicatorList = pm.indicatorList;
-                for(let i=0; i<data.length; i++) {
-                    data[i]['pv_percent'] = data[i][pm.logType]/pv_uv_sum[i]['pv'];
-                    data[i]['uv_percent'] = data[i]['uv']/pv_uv_sum[i]['uv']; 
-                    let obj = {}
-                    for(let j=0; j<indicatorList.length; j++) {
-                        obj[indicatorList[j]] = data[i][indicatorList[j]]!=='undefined' ? data[i][indicatorList[j]]: null;
+                if(pm.raw == true){
+                    cb(resExtra(res2));
+                } else {
+                    let data = utilsTools.filterAryToJson(res2, pm.logType);
+    
+                    let res_data = []
+                    let indicatorList = pm.indicatorList;
+                    for(let i=0; i<data.length; i++) {
+                        data[i]['pv_percent'] = data[i][pm.logType]/pv_uv_sum[i]['pv'];
+                        data[i]['uv_percent'] = data[i]['uv']/pv_uv_sum[i]['uv']; 
+                        let obj = {}
+                        for(let j=0; j<indicatorList.length; j++) {
+                            obj[indicatorList[j]] = data[i][indicatorList[j]]!=='undefined' ? data[i][indicatorList[j]]: null;
+                        }
+                        obj['key'] = data[i]['key']
+                        res_data.push(obj)
                     }
-                    obj['key'] = data[i]['key']
-                    res_data.push(obj)
+                    // console.log(res_data)
+                    cb(resExtra(res_data))
                 }
-                // console.log(res_data)
-                cb(resExtra(res_data))
 
             }).catch(err => {
                 console.log(err)
