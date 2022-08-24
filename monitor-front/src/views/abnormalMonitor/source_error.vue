@@ -1,51 +1,7 @@
 <template>
   <div>
-    <div class="header fixed-header">
-      <div class="h5-header-main">
-        <div class="main-item" style="flex: 1 1 0%">
-          <!--  -->
-        </div>
-
-        <div class="main-item">
-          <div class="flex-row-end flex-row">
-            <span class="text">采样率：？？？</span>
-            <div>
-              <el-popover
-                placement="bottom-end"
-                :width="200"
-                trigger="hover"
-                content="this is content, this is content, this is content"
-              >
-                <div class="help-wrapper">
-                  <div class="popper-content">
-                    <h4 class="main-title">名词解释</h4>
-                    <li class="help-item">
-                      <h5 class="help-label">异常次数：</h5>
-                      <div class="help-content">产生异常的次数</div>
-                    </li>
-
-                    <li class="help-item">
-                      <h5 class="help-label">影响用户：</h5>
-                      <div class="help-content">产生了JS异常影响到的用户数</div>
-                    </li>
-
-                    <li class="help-item">
-                      <h5 class="help-label">异常次数PV比：</h5>
-                      <div class="help-content">异常次数 / 页面PV * 100%</div>
-                    </li>
-                  </div>
-                </div>
-                <div
-                  slot="reference"
-                  style="margin-left: 16px; color: #39f; font-size: 12px"
-                >
-                  <span>帮助文档</span>
-                </div>
-              </el-popover>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="header">
+        <target-web></target-web>
     </div>
 
     <!-- text-board -->
@@ -239,9 +195,13 @@ import * as echarts from "echarts";
 import { getFromTo, getStartAndEnd, judgeDefault, getCurrentDay,
   getNextDay, } from "@/comfunciton";
 import { getDetailByUrl, getTemplate } from "@/api/sourceerror";
+import TargetWeb from '../../components/targetWeb.vue'
+
 export default {
   name: "source-error",
-  components: {},
+  components: {
+    TargetWeb
+  },
   data() {
     return {
       logType: "resloadfail",
@@ -1050,7 +1010,7 @@ export default {
   position: sticky;
   /* position: fixed;  */
   z-index: 999; /*置于最上层*/
-  padding: 0px 20px 10px 20px;
+  padding: 0px 0 10px 0px;
 }
 
 .h5-header-main {

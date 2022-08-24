@@ -52,8 +52,6 @@ export default {
   display: flex;
   flex-direction: column;
   overflow: auto;
-  /* border:1px solid  blue;
-  background: blue; */
- 
+  padding-top: 10px;
 }
 </style>

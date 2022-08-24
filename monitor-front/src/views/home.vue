@@ -2,23 +2,12 @@
   <div class="container">
     <div class="upload">
       <div class="l-con">
-        <i
-          ><svg
-            t="1660381239294"
-            class="icon"
-            viewBox="0 0 1024 1024"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            p-id="2655"
-            width="16"
-            height="16"
-          >
+        <i><svg t="1660381239294" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            p-id="2655" width="16" height="16">
             <path
               d="M949.638897 509.757936c0-241.799068-196.006116-437.805184-437.805184-437.805184-241.800092 0-437.806207 196.006116-437.806207 437.805184 0 241.811348 196.006116 437.817464 437.806207 437.817464 99.262748 0 190.149734-33.771151 263.59242-89.425705 3.015683-3.421936 4.999874-7.789407 4.999874-12.698207 0-10.717086-8.692986-19.407002-19.408025-19.407002-5.562692 0-10.513448 2.207271-14.048971 5.944386l-0.246617 0c-65.719794 48.358381-146.610102 77.313853-234.459916 77.313853-218.947618 0-396.469754-177.544649-396.469754-396.482033 0-218.97013 177.522136-396.470777 396.469754-396.470777 218.969107 0 396.469754 177.500647 396.469754 396.470777 0 66.865897-15.692401 129.814578-44.962028 185.110975l0 0.325411c-0.538259 1.845021-1.12359 3.645017-1.12359 5.627161 0 10.719132 8.688893 19.407002 19.407002 19.407002 8.353248 0 15.331173-5.357008 18.055215-12.742209l0 0.135076C931.289993 650.424676 949.638897 582.250994 949.638897 509.757936zM506.813373 276.017404c0-11.527544-9.367345-20.892843-20.917402-20.892843-11.527544 0-20.892843 9.365298-20.892843 20.892843l0 248.508887c0 0-2.520403 42.010813 41.786709 41.785685L731.994971 566.311976c0.068562 0 0.156566 0.045025 0.228197 0.045025 11.546987 0 20.914332-9.364275 20.914332-20.891819s-9.367345-20.892843-20.892843-20.938891L506.79086 524.526291 506.79086 276.153504C506.79086 276.108478 506.813373 276.06243 506.813373 276.017404z"
-              p-id="2656"
-              fill="#8a8a8a"
-            ></path></svg
-        ></i>
+              p-id="2656" fill="#8a8a8a"></path>
+          </svg></i>
         <span style="padding-left: 5px">数据更新于：{{ time }}</span>
       </div>
       <div class="r-con">
@@ -105,7 +94,7 @@ export default {
       this.start = getCurrentMinute();
       this.end = getLastHour(this.start);
     },
-    initData() {},
+    initData() { },
   },
   created() {
     this.initTime();
@@ -163,19 +152,19 @@ export default {
     test(JSON.stringify(temp1)).then((res) => {
       console.log(res.data);
     });
-        test(JSON.stringify(temp2)).then((res) => {
+    test(JSON.stringify(temp2)).then((res) => {
       console.log(res.data);
     });
-        test(JSON.stringify(temp3)).then((res) => {
+    test(JSON.stringify(temp3)).then((res) => {
       console.log(res.data);
     });
-        test(JSON.stringify(temp4)).then((res) => {
+    test(JSON.stringify(temp4)).then((res) => {
       console.log(res.data);
     });
-        test(JSON.stringify(temp5)).then((res) => {
+    test(JSON.stringify(temp5)).then((res) => {
       console.log(res.data);
     });
-        test(JSON.stringify(temp6)).then((res) => {
+    test(JSON.stringify(temp6)).then((res) => {
       console.log(res.data);
     });
     var jserror_echarts = echarts.init(document.getElementById("jsEcharts"));
@@ -977,6 +966,7 @@ export default {
   height: 100%;
   width: 100%;
 }
+
 .upload {
   display: flex;
   justify-content: space-between;
@@ -985,11 +975,13 @@ export default {
   align-content: center;
   align-items: center;
 }
+
 .l-con {
   display: flex;
   font-size: 14px;
   color: #999;
 }
+
 .main {
   margin-top: 10px;
   width: 100%;
@@ -997,6 +989,7 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
 }
+
 .box-card {
   display: block;
   width: 33.3%;
@@ -1005,6 +998,7 @@ export default {
   margin-bottom: 2px;
   margin-top: 8px;
 }
+
 .el-card {
   padding-left: 12px;
   padding-right: 12px;
@@ -1013,6 +1007,7 @@ export default {
   margin-left: 6px;
   margin-right: 6px;
 }
+
 .box-title {
   text-align: left;
   width: 100%;
