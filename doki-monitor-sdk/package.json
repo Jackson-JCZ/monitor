@@ -1,0 +1,22 @@
+{
+  "name": "doki-monitor-sdk",
+  "version": "1.0.10",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "dev": "webpack-dev-server"
+  },
+  "keywords": [],
+  "author": "DoKiDoKi",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liu-yunnan/f-monitor-demo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/liu-yunnan/f-monitor-demo/issues"
+  },
+  "homepage": "https://github.com/liu-yunnan/f-monitor-demo#readme",
+  "description": ""
+}
