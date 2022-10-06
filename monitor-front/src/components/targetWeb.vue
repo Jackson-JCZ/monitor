@@ -59,6 +59,8 @@ export default {
         },
         handleCommand(command) {
             this.target.title = command;
+            if(command=='淘宝') this.target.url = ''
+
         }
     }
 }

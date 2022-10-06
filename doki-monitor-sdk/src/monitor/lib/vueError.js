@@ -37,7 +37,4 @@ export function injectVueError (error, vm, info) {
     hook: info,// 报错的Vue阶段
   }
   tracker.send(exception)
-
-
-
 }
