@@ -26,7 +26,7 @@
             <h5 class="text-title text-help first-title">首字节</h5>
           </div>
           <div class="text-value">
-            <span class="label">9999</span>
+            <span class="label">{{firstB}}</span>
           </div>
 
           <div class="text-sub-value">
@@ -48,7 +48,7 @@
           <h5 class="text-title text-help">DOM Ready</h5>
 
           <div class="text-value">
-            <span class="label">9999</span>
+            <span class="label">{{domR}}</span>
           </div>
 
           <div class="text-sub-value">
@@ -70,7 +70,7 @@
           <h5 class="text-title text-help">页面完全加载</h5>
 
           <div class="text-value">
-            <span class="label">9999</span>
+            <span class="label">{{loaded}}</span>
           </div>
 
           <div class="text-sub-value">
@@ -91,7 +91,7 @@
           <h5 class="text-title text-help">采样PV</h5>
 
           <div class="text-value">
-            <span class="label">9999</span>
+            <span class="label">{{pv}}</span>
           </div>
 
           <div class="text-sub-value">
@@ -245,6 +245,10 @@ export default {
   },
   data() {
     return {
+      pv: 0,
+      domR: 0,
+      loaded: 0,
+      firstB: 0,
       logType: "perf",
       start: "2022-8-4 23:13:00",
       end: "2022-8-4 23:35:00",
@@ -1036,6 +1040,10 @@ export default {
   created() {
     this.getTableData();
     this.initTimeTable();
+    this.pv  = parseInt(Math.random()*10000)
+    this.domR = parseInt(Math.random()*10000)
+    this.loaded = parseInt(Math.random()*10000)
+    this.firstB = parseInt(Math.random()*10000)
   },
   watch: {
     currentPage(newValue, oldValue) {

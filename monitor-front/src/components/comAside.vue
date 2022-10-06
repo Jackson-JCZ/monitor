@@ -164,5 +164,6 @@ export default {
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 160px;
   height: 100%;
+  overflow-x: hidden;
 }
 </style>

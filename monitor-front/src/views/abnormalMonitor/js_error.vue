@@ -24,7 +24,7 @@
             <h5 class="text-title text-help first-title">异常次数</h5>
           </div>
           <div class="text-value">
-            <span class="label">9999</span>
+            <span class="label">{{errorNum}}</span>
           </div>
           <div class="text-sub-value">
             <span class="text-help">
@@ -43,7 +43,7 @@
           <h5 class="text-title text-help">异常次数PV比</h5>
 
           <div class="text-value">
-            <span class="label">9999</span>
+            <span class="label">{{errorPv}}</span>
           </div>
 
           <div class="text-sub-value">
@@ -63,7 +63,7 @@
         <div class="text-board-context text-normal text-center">
           <h5 class="text-title text-help">影响用户占比</h5>
           <div class="text-value">
-            <span class="label">9999</span>
+            <span class="label">{{affectUser}}</span>
           </div>
           <div class="text-sub-value">
             <span class="text-help">
@@ -238,6 +238,9 @@ export default {
   },
   data() {
     return {
+      affectUser: 0,
+      errorNum: 0,
+      errorPv: 0,
       logChoose: "first",
       logType: "jserror",
       start: "2022-08-11 15:36:00",
@@ -1349,6 +1352,9 @@ at https://gw.myobjects.com/os/douknow/skylark/common.e7634e5b.async.js:1:241071
     test(JSON.stringify(temp)).then((res)=>{
       console.log(res)
     })
+    this.affectUser = parseInt(Math.random()*10000)
+    this.errorNum = parseInt(Math.random()*10000)
+    this.errorPv = parseInt(Math.random()*10000)
   },
   mounted() {
     // 还需要初始化时间操作  默认触发一次点击事件 confirmParam

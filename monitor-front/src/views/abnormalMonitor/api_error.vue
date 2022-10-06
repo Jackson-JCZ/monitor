@@ -27,7 +27,7 @@
             <h5 class="text-title text-help first-title">请求次数</h5>
           </div>
           <div class="text-value">
-            <span class="label">9999</span>
+            <span class="label">{{requestNum}}</span>
           </div>
 
           <div class="text-sub-value">
@@ -49,7 +49,7 @@
           <h5 class="text-title text-help">成功率</h5>
 
           <div class="text-value">
-            <span class="label">9999</span>
+            <span class="label">{{success}}</span>
           </div>
 
           <div class="text-sub-value">
@@ -70,7 +70,7 @@
           <h5 class="text-title text-help">请求平均耗时</h5>
 
           <div class="text-value">
-            <span class="label">9999</span>
+            <span class="label">{{spendTimeAvg}}</span>
           </div>
 
           <div class="text-sub-value">
@@ -268,6 +268,9 @@ export default {
   },
   data() {
     return {
+      requestNum: 0,
+      spendTimeAvg: 0,
+      success: 0, 
       logChoose: "first",
       logType: "api",
       start: "2022-8-4 21:61:00",
@@ -709,6 +712,9 @@ export default {
   created() {
     //方法数据创建后就可以加载一下默认日期选择
     this.initTimeTable();
+    this.success = parseInt(Math.random()*10000)
+    this.spendTimeAvg = parseInt(Math.random()*10000)
+    this.requestNum = parseInt(Math.random()*10000)
   },
   mounted() {
     // 还需要初始化时间操作  默认触发一次点击事件 confirmParam

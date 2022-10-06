@@ -26,7 +26,7 @@
             <h5 class="text-title text-help first-title">白屏次数</h5>
           </div>
           <div class="text-value">
-            <span class="label">9999</span>
+            <span class="label">{{blankNum}}</span>
           </div>
 
           <div class="text-sub-value">
@@ -48,7 +48,7 @@
           <h5 class="text-title text-help">白屏率</h5>
 
           <div class="text-value">
-            <span class="label">9999</span>
+            <span class="label">{{blankPercent}}</span>
           </div>
 
           <div class="text-sub-value">
@@ -91,7 +91,7 @@
           <h5 class="text-title text-help">影响用户比</h5>
 
           <div class="text-value">
-            <span class="label">9999</span>
+            <span class="label">{{affectUser}}</span>
           </div>
 
           <div class="text-sub-value">
@@ -236,6 +236,9 @@ export default {
   },
   data() {
     return {
+      affectUser: 0,
+      blankPercent: 0,
+      blankNum: 0,
       logType: "blank",
       start: "2022-8-11 23:53:00",
       end: "2022-8-12 00:22:00",
@@ -317,12 +320,12 @@ export default {
           key: "2022-8-11 23:53:00",
         },
         {
-          blank_num: 4,
-          blankRate: 0.8589236153476931,
+          blank_num: 8,
+          blankRate: 0.8579236153476931,
           key: "2022-8-11 23:54:00",
         },
         {
-          blank_num: 4,
+          blank_num: 2,
           blankRate: 0.25394746744402386,
           key: "2022-8-11 23:55:00",
         },
@@ -332,12 +335,12 @@ export default {
           key: "2022-8-11 23:56:00",
         },
         {
-          blank_num: 4,
+          blank_num: 9,
           blankRate: 0.5533895998276932,
           key: "2022-8-11 23:57:00",
         },
         {
-          blank_num: 4,
+          blank_num: 5,
           blankRate: 0.45036797170889264,
           key: "2022-8-11 23:58:00",
         },
@@ -347,7 +350,7 @@ export default {
           key: "2022-8-11 23:59:00",
         },
         {
-          blank_num: 4,
+          blank_num: 1,
           blankRate: 0.5018279735158813,
           key: "2022-8-12 00:00:00",
         },
@@ -357,27 +360,27 @@ export default {
           key: "2022-8-12 00:01:00",
         },
         {
-          blank_num: 4,
+          blank_num: 7,
           blankRate: 0.966245135213345,
           key: "2022-8-12 00:02:00",
         },
         {
-          blank_num: 4,
+          blank_num: 6,
           blankRate: 0.3942345750109637,
           key: "2022-8-12 00:03:00",
         },
         {
-          blank_num: 4,
+          blank_num: 3,
           blankRate: 0.6608730827463949,
           key: "2022-8-12 00:04:00",
         },
         {
-          blank_num: 4,
+          blank_num: 5,
           blankRate: 0.7589396310719125,
           key: "2022-8-12 00:05:00",
         },
         {
-          blank_num: 4,
+          blank_num: 9,
           blankRate: 0.4744790876582654,
           key: "2022-8-12 00:06:00",
         },
@@ -387,12 +390,12 @@ export default {
           key: "2022-8-12 00:07:00",
         },
         {
-          blank_num: 4,
+          blank_num: 2,
           blankRate: 0.3679959291156367,
           key: "2022-8-12 00:08:00",
         },
         {
-          blank_num: 4,
+          blank_num: 11,
           blankRate: 0.1655500882050669,
           key: "2022-8-12 00:09:00",
         },
@@ -402,7 +405,7 @@ export default {
           key: "2022-8-12 00:10:00",
         },
         {
-          blank_num: 4,
+          blank_num: 10,
           blankRate: 0.7204418949717706,
           key: "2022-8-12 00:11:00",
         },
@@ -412,7 +415,7 @@ export default {
           key: "2022-8-12 00:12:00",
         },
         {
-          blank_num: 4,
+          blank_num: 6,
           blankRate: 0.22140796067893498,
           key: "2022-8-12 00:13:00",
         },
@@ -422,12 +425,12 @@ export default {
           key: "2022-8-12 00:14:00",
         },
         {
-          blank_num: 4,
+          blank_num: 6,
           blankRate: 0.8637073911054189,
           key: "2022-8-12 00:15:00",
         },
         {
-          blank_num: 4,
+          blank_num: 5,
           blankRate: 0.2664416765728388,
           key: "2022-8-12 00:16:00",
         },
@@ -457,7 +460,7 @@ export default {
           key: "2022-8-12 00:21:00",
         },
         {
-          blank_num: 4,
+          blank_num: 9,
           blankRate: 0.2820460394319275,
           key: "2022-8-12 00:22:00",
         },
@@ -467,27 +470,27 @@ export default {
           key: "2022-8-12 00:23:00",
         },
         {
-          blank_num: 4,
+          blank_num: 3,
           blankRate: 0.8426215874068677,
           key: "2022-8-12 00:24:00",
         },
         {
-          blank_num: 4,
+          blank_num: 5,
           blankRate: 0.8887084256247682,
           key: "2022-8-12 00:25:00",
         },
         {
-          blank_num: 4,
+          blank_num: 5,
           blankRate: 0.7142202271558094,
           key: "2022-8-12 00:26:00",
         },
         {
-          blank_num: 4,
+          blank_num: 6,
           blankRate: 0.44365324302304265,
           key: "2022-8-12 00:27:00",
         },
         {
-          blank_num: 4,
+          blank_num: 7,
           blankRate: 0.5991654834486602,
           key: "2022-8-12 00:28:00",
         },
@@ -567,7 +570,7 @@ export default {
           key: "2022-8-12 00:43:00",
         },
         {
-          blank_num: 4,
+          blank_num: 2,
           blankRate: 0.5103894161278992,
           key: "2022-8-12 00:44:00",
         },
@@ -607,7 +610,7 @@ export default {
           key: "2022-8-12 00:51:00",
         },
         {
-          blank_num: 4,
+          blank_num: 10,
           blankRate: 0.6039251292179153,
           key: "2022-8-12 00:52:00",
         },
@@ -823,6 +826,9 @@ export default {
     this.getTableData();
     //方法数据创建后就可以加载一下默认日期选择
     this.initTimeTable();
+    this.affectUser = parseInt(Math.random()*10000)
+    this.blankNum = parseInt(Math.random()*10000)
+    this.blankPercent = parseInt(Math.random()*10000)
   },
   watch: {
     currentPage(newValue, oldValue) {

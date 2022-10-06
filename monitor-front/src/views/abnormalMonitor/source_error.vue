@@ -26,7 +26,7 @@
             <h5 class="text-title text-help first-title">失败资源数</h5>
           </div>
           <div class="text-value">
-            <span class="label">9999</span>
+            <span class="label">{{failSources}}</span>
           </div>
 
           <div class="text-sub-value">
@@ -47,7 +47,7 @@
         <div class="text-board-context text-normal text-center">
           <h5 class="text-title text-help">异常次数PV比</h5>
           <div class="text-value">
-            <span class="label">9999</span>
+            <span class="label">{{errorPv}}</span>
           </div>
           <div class="text-sub-value">
             <span class="text-help">
@@ -67,7 +67,7 @@
           <h5 class="text-title text-help">影响用户占比</h5>
 
           <div class="text-value">
-            <span class="label">9999</span>
+            <span class="label">{{affectUser}}</span>
           </div>
 
           <div class="text-sub-value">
@@ -204,6 +204,9 @@ export default {
   },
   data() {
     return {
+      failSources: 0,
+      affectedUser: 0,
+      errorPv: 0,
       logType: "resloadfail",
       start: "2022-8-12 0:11:00",
       end: "2022-8-12 0:36:00",
@@ -937,6 +940,9 @@ export default {
   created() {
     //方法数据创建后就可以加载一下默认日期选择
     this.initTimeTable();
+    this.failSources = parseInt(Math.random()*10000)
+    this.affectedUser = parseInt(Math.random()*10000)
+    this.errorPv = parseInt(Math.random()*10000)
   },
   mounted() {
     // 还需要初始化时间操作  默认触发一次点击事件 confirmParam

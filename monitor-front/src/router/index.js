@@ -8,6 +8,7 @@ const Api=()=>import('../views/abnormalMonitor/api_error.vue')
 const Sour_error=()=>import('../views/abnormalMonitor/source_error.vue')
 const Page_perf=()=>import('../views/performanceMonitor/page_performance.vue')
 const Pvuv=()=>import('../views/behaviorMonitor/pvuv_behavior.vue')
+const notFound=()=>import('../views/404.vue')
 Vue.use(VueRouter)
 const routes = [
   {
@@ -56,8 +57,15 @@ const routes = [
       }
     ]
   },
-
-
+  {
+    path: '/404',
+    name: 'notFound',
+    component: notFound
+  },
+  { 
+    path: '*', 
+    redirect: '/404'
+  }
 ]
 
 const router = new VueRouter({

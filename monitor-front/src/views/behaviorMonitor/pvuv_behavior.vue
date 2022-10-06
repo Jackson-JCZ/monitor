@@ -26,7 +26,7 @@
             <h5 class="text-title text-help first-title">PV</h5>
           </div>
           <div class="text-value">
-            <span class="label">9999</span>
+            <span class="label">{{pv}}</span>
           </div>
 
           <div class="text-sub-value">
@@ -48,7 +48,7 @@
           <h5 class="text-title text-help">UV</h5>
 
           <div class="text-value">
-            <span class="label">9999</span>
+            <span class="label">{{uv}}</span>
           </div>
 
           <div class="text-sub-value">
@@ -91,7 +91,7 @@
           <h5 class="text-title text-help">页面停留时间</h5>
 
           <div class="text-value">
-            <span class="label">9999</span>
+            <span class="label">{{keepTime}}</span>
           </div>
 
           <div class="text-sub-value">
@@ -211,6 +211,9 @@ export default {
   },
   data() {
     return {
+      pv: 0,
+      uv: 0,
+      keepTime: 0,
       logType: "pvuv",
       start: "2022-8-12 0:45:00",
       end: "2022-8-12 1:30:00",
@@ -773,6 +776,9 @@ export default {
     this.getTableData();
     //方法数据创建后就可以加载一下默认日期选择
     this.initTimeTable();
+    this.pv = parseInt(Math.random()*10000)
+    this.uv = parseInt(Math.random()*10000)
+    this.keepTime = parseInt(Math.random()*10000)
   },
   mounted() {
     // 还需要初始化时间操作  默认触发一次点击事件 confirmParam
